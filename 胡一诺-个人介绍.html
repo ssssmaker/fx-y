@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>胡一诺 · 个人介绍</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --bg: #f0f9fa;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #cbd5e1;
+            --accent: #06b6d4;
+            --moon: #7c3aed;
+            --gradient: linear-gradient(135deg, #0891b2, #06b6d4, #22d3ee);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ===== 导航栏 ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s;
+        }
+        nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+        nav .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        nav .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+            transition: width 0.3s;
+        }
+        nav .nav-links a:hover {
+            color: var(--primary);
+        }
+        nav .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            padding: 140px 24px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, #cffafe 0%, #f0f9fa 60%, #f5f3ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 3rem;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 12px 40px rgba(8, 145, 178, 0.35);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle2 {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tags {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tag {
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: #fff;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            transition: all 0.3s;
+        }
+        .hero .tag:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .hero .tag.purple-tag {
+            color: var(--moon);
+            border-color: var(--moon);
+        }
+        .hero .tag.purple-tag:hover {
+            background: var(--moon);
+            color: #fff;
+        }
+
+        /* ===== 通用 Section ===== */
+        .section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 72px 24px;
+        }
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .section .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            font-size: 1rem;
+        }
+
+        /* ===== 关于我 ===== */
+        .about-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+        .about-card .intro-block {
+            margin-bottom: 28px;
+        }
+        .about-card .intro-block:last-child {
+            margin-bottom: 0;
+        }
+        .about-card .intro-block .block-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .about-card .intro-block p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            line-height: 1.85;
+        }
+        .about-card .highlight-text {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .about-card .purple-highlight {
+            color: var(--moon);
+            font-weight: 600;
+        }
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-top: 24px;
+        }
+        .hobby-item {
+            background: #f0f9fa;
+            padding: 9px 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+            border: 1px solid #cffafe;
+            transition: transform 0.2s;
+        }
+        .hobby-item:hover {
+            transform: scale(1.05);
+        }
+        .hobby-item.purple {
+            background: #f5f3ff;
+            color: var(--moon);
+            border-color: #e0e7ff;
+        }
+
+        /* ===== 技能 ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .skill-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 28px 24px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        }
+        .skill-card .skill-icon {
+            font-size: 2.2rem;
+            margin-bottom: 14px;
+        }
+        .skill-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .skill-card .skill-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .skill-card .skill-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--gradient);
+            transition: width 1.2s ease;
+        }
+        .skill-level {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* ===== 时间线 ===== */
+        .timeline {
+            position: relative;
+            padding-left: 36px;
+            border-left: 2px solid #cbd5e1;
+            margin-left: 20px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 36px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45.5px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        .timeline-item.milestone::before {
+            background: #f59e0b;
+            box-shadow: 0 0 0 3px #f59e0b;
+        }
+        .timeline-item .time {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .timeline-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .timeline-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .timeline-item .badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.78rem;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* ===== 大学活动 ===== */
+        .campus-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .campus-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .campus-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        }
+        .campus-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .campus-card h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+        .campus-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== 联系方式 ===== */
+        .contact-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card);
+            padding: 14px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        .contact-item:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 4px 16px rgba(8, 145, 178, 0.15);
+        }
+        .contact-item .contact-icon {
+            font-size: 1.3rem;
+        }
+
+        /* ===== 页脚 ===== */
+        footer {
+            text-align: center;
+            padding: 36px 24px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .about-card {
+                padding: 24px;
+            }
+            nav .nav-links {
+                gap: 14px;
+            }
+            nav .nav-links a {
+                font-size: 0.8rem;
+            }
+            .timeline {
+                margin-left: 0;
+                padding-left: 28px;
+            }
+            .timeline-item::before {
+                left: -37px;
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        /* ===== 滚动动画 ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="logo">HU YINUO</div>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#experience">经历</a></li>
+                <li><a href="#campus">大学</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="avatar">胡</div>
+        <h1>你好，我是<span class="highlight">胡一诺</span> 👋</h1>
+        <p class="subtitle">华中科技大学 · 船舶与海洋工程学院 · 轮机工程 2501 班</p>
+        <p class="subtitle2">🇨🇳 湖北 · 宜昌 · 枝江 | 2007.09.06</p>
+        <div class="tags">
+            <span class="tag">🏓 乒乓球</span>
+            <span class="tag">🏀 篮球</span>
+            <span class="tag">♟️ 象棋</span>
+            <span class="tag">✍️ 写作</span>
+            <span class="tag purple-tag">🌙 Project Moon</span>
+            <span class="tag">🎮 FPS/RTS</span>
+            <span class="tag">🎬 二次元</span>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section class="section fade-in" id="about">
+        <h2>关于我</h2>
+        <p class="section-subtitle">一个热爱技术、运动与故事的工科生</p>
+        <div class="about-card">
+
+            <div class="intro-block">
+                <div class="block-label">🚢 基本信息</div>
+                <p>
+                    我是<span class="highlight-text">胡一诺</span>，2007年9月6日出生于湖北宜昌枝江，
+                    现就读于<span class="highlight-text">华中科技大学船舶与海洋工程学院</span>轮机工程专业2501班，是一名对世界充满好奇的大一新生。
+                </p>
+            </div>
+
+            <div class="intro-block">
+                <div class="block-label">📚 求学之路</div>
+                <p>
+                    回望来路：从枝江市团结路小学启蒙，到枝江英杰学校初中部砥砺前行，
+                    最终以<span class="highlight-text">中考A等、全县前一百</span>的成绩考入枝江市第一高级中学；
+                    三年寒窗，高考圆梦华科大。每一步都踏实，每一程都珍贵。
+                </p>
+            </div>
+
+            <div class="intro-block">
+                <div class="block-label">🏓 运动与竞技</div>
+                <p>
+                    我是乒乓球的竞技者、篮球的追逐者，<span class="highlight-text">乒乓球与象棋</span>均多次参加县市一级比赛并斩获奖项。
+                </p>
+            </div>
+
+            <div class="intro-block">
+                <div class="block-label">✍️ 写作与表达</div>
+                <p>
+                    高中时期，我在课余时间坚持小说创作，累计写下<span class="highlight-text">十万余字</span>。那是属于我自己的精神世界，落笔之间，既是表达，也是自我对话。
+                </p>
+            </div>
+
+            <div class="intro-block">
+                <div class="block-label">🎮 游戏与叙事</div>
+                <p>
+                    我是一名<span class="highlight-text">重度游戏玩家</span>。钟情FPS的瞬息万变、RTS的运筹帷幄，更沉迷于剧情向游戏带来的沉浸共鸣。
+                    尤其钟爱韩国工作室 <span class="purple-highlight">Project Moon</span> 三部曲——从《Lobotomy Corporation》到《Library of Ruina》再到《Limbus Company》，那个冰冷深邃的"都市"世界观与不妥协的叙事风格，让我深深着迷。
+                </p>
+            </div>
+
+            <div class="intro-block">
+                <div class="block-label">🎬 二次元</div>
+                <p>
+                    追番、看漫、感受故事的温度，是日常生活中不可或缺的养分。
+                </p>
+            </div>
+
+            <div class="hobby-grid">
+                <div class="hobby-item">🏓 乒乓球</div>
+                <div class="hobby-item">🏀 篮球</div>
+                <div class="hobby-item">♟️ 象棋</div>
+                <div class="hobby-item">✍️ 写作 10w+</div>
+                <div class="hobby-item">🔫 FPS</div>
+                <div class="hobby-item">🗺️ RTS</div>
+                <div class="hobby-item purple">🌙 Project Moon</div>
+                <div class="hobby-item">🎬 二次元</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section class="section fade-in" id="skills">
+        <h2>专业技能</h2>
+        <p class="section-subtitle">持续学习中，不断精进</p>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🤖</div>
+                <h3>AI 应用</h3>
+                <p style="color:var(--text-secondary);font-size:0.9rem;">DeepSeek 等大模型工具</p>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width:80%;"></div></div>
+                <span class="skill-level">熟练度：80%</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>编程开发</h3>
+                <p style="color:var(--text-secondary);font-size:0.9rem;">VS / C++</p>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width:50%;"></div></div>
+                <span class="skill-level">熟练度：50%</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📐</div>
+                <h3>3D 建模</h3>
+                <p style="color:var(--text-secondary);font-size:0.9rem;">SolidWorks</p>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width:45%;"></div></div>
+                <span class="skill-level">熟练度：45%</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🏓</div>
+                <h3>乒乓球</h3>
+                <p style="color:var(--text-secondary);font-size:0.9rem;">县市级比赛获奖</p>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width:75%;"></div></div>
+                <span class="skill-level">竞赛水平</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">♟️</div>
+                <h3>象棋</h3>
+                <p style="color:var(--text-secondary);font-size:0.9rem;">县市级比赛获奖</p>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width:72%;"></div></div>
+                <span class="skill-level">竞赛水平</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">✍️</div>
+                <h3>小说写作</h3>
+                <p style="color:var(--text-secondary);font-size:0.9rem;">累计创作十万余字</p>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width:70%;"></div></div>
+                <span class="skill-level">高中持续输出</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 经历 -->
+    <section class="section fade-in" id="experience">
+        <h2>成长历程</h2>
+        <p class="section-subtitle">一步一个脚印，每一步都算数</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">2007 年 9 月 6 日</div>
+                <h3>🎂 生于湖北宜昌 · 枝江</h3>
+                <p>故事的开始 🌟</p>
+            </div>
+            <div class="timeline-item">
+                <div class="time">2012 — 2018</div>
+                <h3>🏫 枝江市团结路小学</h3>
+                <p>童年启蒙，快乐成长。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="time">2018 — 2021</div>
+                <h3>🏫 枝江英杰学校 · 初中部</h3>
+                <p>砥砺前行，打下坚实基础，成绩优异。</p>
+            </div>
+            <div class="timeline-item milestone">
+                <div class="time">2021 — 2024</div>
+                <h3>🏫 枝江市第一高级中学</h3>
+                <p>以中考 A 等、全县前一百的优异成绩考入枝江一中。三年寒窗之余坚持小说创作，累计十万余字。</p>
+                <span class="badge">⭐ 中考 A 等 · 全县前一百</span>
+            </div>
+            <div class="timeline-item">
+                <div class="time">2024 年 9 月 — 至今</div>
+                <h3>🏫 华中科技大学 · 船舶与海洋工程学院</h3>
+                <p>轮机工程专业 2501 班，大一在读。加入学院乒乓球队，加入院学生会文体发展中心，开启丰富多彩的大学生活。</p>
+                <span class="badge">🎓 大学阶段</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 大学活动 -->
+    <section class="section fade-in" id="campus">
+        <h2>大学校园生活</h2>
+        <p class="section-subtitle">丰富多彩的华科大日常</p>
+        <div class="campus-cards">
+            <div class="campus-card">
+                <div class="icon">🏓</div>
+                <h3>学院乒乓球队</h3>
+                <p>加入船舶与海洋工程学院乒乓球队，代表学院征战校内赛事</p>
+            </div>
+            <div class="campus-card">
+                <div class="icon">🎤</div>
+                <h3>学生会文体发展中心</h3>
+                <p>参与学院文体活动的策划与组织，在服务中锻炼成长</p>
+            </div>
+            <div class="campus-card">
+                <div class="icon">📚</div>
+                <h3>轮机工程 2501 班</h3>
+                <p>专业学习进行中，探索船舶与海洋工程的广阔世界</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="section fade-in" id="contact">
+        <h2>联系我</h2>
+        <p class="section-subtitle">欢迎交流——打球、下棋、开黑、聊 Project Moon 🌙</p>
+        <div class="contact-row">
+            <a href="mailto:2100412786@qq.com" class="contact-item">
+                <span class="contact-icon">📧</span> 2100412786@qq.com
+            </a>
+            <div class="contact-item">
+                <span class="contact-icon">💬</span> QQ: 431618373
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">📱</span> 微信: huyinuo070906
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span> 152****4956
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2025 胡一诺 · 华中科技大学 · 船舶与海洋工程学院 · 用 ❤️ 和代码构建</p>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fills = entry.target.querySelectorAll('.skill-bar-fill');
+                    fills.forEach(fill => {
+                        const w = fill.style.width;
+                        fill.style.width = '0%';
+                        requestAnimationFrame(() => {
+                            fill.style.width = w;
+                        });
+                    });
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelector('.skills-grid') && skillObserver.observe(document.querySelector('.skills-grid'));
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
